@@ -1,0 +1,329 @@
+*{margin:0;padding:0}
+div,h1,h2,h3,p,ul,li,input,textarea,table,tr,th,td{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box}
+a{text-decoration:none;outline:none}
+a img{border-style:none}
+ul,li{list-style-type:none}
+
+html {
+font-size:62.5%
+}
+body {
+background:#fff;/* 背景 */
+color:#675950;/* 文字色 */
+font-family:'Raleway',Verdana,Roboto,'游ゴシック','Yu Gothic','游ゴシック体','YuGothic','ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','メイリオ',Meiryo,'ＭＳ Ｐゴシック','MS PGothic',sans-serif;
+font-size:1.2em;
+letter-spacing:2px;
+padding:20px;
+text-align:center;
+overflow-wrap:break-word;
+word-wrap:break-word
+}
+a {
+color:#ffa2c2
+}
+/*--------------------------------------------------------
+メイン
+--------------------------------------------------------*/
+#wrapper{
+margin:0 auto;
+width:1200px; /* 全体の幅・大きさはここで変更 */
+}
+.block {
+background-image:url(img/back01.gif);
+border-radius:5px;
+box-shadow:0 1px 5px #ccc;
+clear:both;
+margin:0 0 20px 0;
+padding:20px;
+text-align:left;
+word-wrap:break-word
+}
+.block-inner{
+background:#fff;
+border-radius:5px;
+border:1px solid #ccc;
+padding:20px
+}
+/*--------------------------------------------------------
+メニュー
+--------------------------------------------------------*/
+#menupage {
+padding:10px 20px;
+text-align:right
+}
+#menu {
+background-image:url(img/back01.gif);
+border:2px solid #857663;
+font-size:1.2em;
+position:absolute;
+text-align:center;
+bottom:0;left:0;
+width:100%
+}
+#nav li {
+background:#857663;
+display:inline-block;
+height:2em;line-height:2em
+}
+#nav li+ li {
+border-left:1px dashed #483b3c
+}
+#nav li a {
+color:#f9e4e6;
+display:block;
+padding:0 10px
+}
+/*--------------------------------------------------------
+ページ上部へのリンク
+--------------------------------------------------------*/
+#pagetop{
+background-color:rgba(72,59,60,0.8);
+border:3px solid #ffd6da;
+box-shadow:0 1px 5px #675950;
+border-radius:30px;
+width:50px;height:50px; /* 大きさ */
+bottom:20px;right:20px; /* 位置 */
+line-height:16px;
+padding-top:22px;
+text-align:center;
+display:block;
+position:fixed;
+box-sizing:border-box
+}
+#pagetop:before {
+content:'\25B2';
+position:absolute;
+top:7px;left:0;
+width:100%;
+font-size:14px
+}
+#pagetop:hover{
+background-color:rgba(255,255,255,0.8);
+transition:.3s
+}
+/*--------------------------------------------------------
+見出し、枠、線
+--------------------------------------------------------*/
+h1 {
+display:none
+}
+#index h1,#menupage h1{
+display:block;
+font-size:2em;
+letter-spacing:3px;
+margin:0 0 .5em 0
+}
+h2 {
+color:#675950;
+font-size:1.5em;
+margin:0.2em 0 0.5em 0;
+padding:0.2em 0;
+position:relative;
+border-bottom:2px solid #ffd6da
+}
+h2:first-letter {
+color:#ffd6da;
+font-size:1.7em
+}
+h2::after {
+background-color:#675950;
+position:absolute;
+bottom:-2px;left:0;
+content:'';
+height:2px;width:20%;
+z-index:2
+}
+h3 {
+font-size:1.3em;
+border-bottom:1px #675950 dotted;
+font-weight:400;
+min-height:30px;line-height:30px;
+margin:15px 0
+}
+.marker {
+background:#e6faff;
+padding:1px 5px
+}
+.ln01 {
+border-left:5px solid #ffd6da;
+margin:5px 0;
+padding:3px
+}
+.ln02 {
+border-left:5px solid #675950;
+margin:5px 0;
+padding:3px
+}
+.navi {
+border:1px #675950 solid;
+margin:10px 0;
+padding:3px;
+text-align:center
+}
+.title {
+color:#675950;
+font-size:1.5em;
+font-weight:700;
+margin:2em 0;
+text-align:right
+}
+.title:first-letter {
+color:#ffd6da;
+font-size:1.6em
+}
+.txt {
+border-left:1px dotted #675950;
+color:#999;
+margin:1em;
+padding:0 0 0 1em
+}
+dt {
+font-weight:700;
+float:left;
+margin:0 0 5px;
+width:10em
+}
+dd {
+border-bottom:1px solid #999;
+margin:0 0 5px 12em
+}
+dl:after{
+content:"";
+clear:both;
+height:0;
+display:block;
+visibility:hidden
+}
+em {
+background:#f4cbcf; /* Ie9 */
+background:-webkit-gradient(linear, left top, left bottom, color-stop(0, #fff), color-stop(0.49, #fff), color-stop(0.5, #f4cbcf), color-stop(1, #f4cbcf));
+background: -webkit-linear-gradient(transparent 50%, #f4cbcf 0%);
+background:linear-gradient(transparent 50%, #f4cbcf 0%);
+font-weight:700
+}
+input[type="text"] {
+background:#f4cbcf;
+border:1px solid #675950;
+color:#675950;
+font-family:Verdana,Roboto,'游ゴシック','Yu Gothic','游ゴシック体','YuGothic','ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','メイリオ',Meiryo,'ＭＳ Ｐゴシック','MS PGothic',sans-serif;
+font-size:1.2em;
+margin:3px 0;
+/* width:400px */
+}
+select, option {
+  background:#f4cbcf;
+  border:1px solid #675950;
+  color:#675950;
+  font-family:Verdana,Roboto,'游ゴシック','Yu Gothic','游ゴシック体','YuGothic','ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','メイリオ',Meiryo,'ＭＳ Ｐゴシック','MS PGothic',sans-serif;
+  font-size:1.2em;
+  margin:3px 0;
+}
+textarea {
+  height:50px
+}
+input[type="button"],
+input[type="submit"] {
+    padding: 1px 6px;
+}
+hr {
+display:block;
+border:0;  
+border-top:1px solid #ccc;
+margin:1em 0;
+padding:0;
+height:1px
+}
+.cf:before,.cf:after{content:" ";display:table}
+.cf:after{clear:both}
+
+.ctrldiv {
+    text-align: left;
+    margin: 10px 10px 10px 10px;
+}
+
+.ctrlerr {
+    color: red;
+}
+
+.detailtable {
+    width: 100%;
+    border-collapse:separate;
+    border-spacing: 0;
+    margin:0 0 20px 0;
+  }
+
+  .detailtable tr:first-child{
+    background-image:url(img/back01.gif);
+  }
+  
+  .detailtable th:first-child{
+    border-radius: 5px 0 0 0;
+  }
+  
+  .detailtable th:last-child{
+    border-radius: 0 5px 0 0;
+    border-right: 1px solid #675950;
+  }
+  
+  .detailtable th{
+    text-align: center;
+    color:white;
+    border-left: 1px solid #675950;
+    border-top: 1px solid #675950;
+    border-bottom: 1px solid #675950;
+    box-shadow: 0px 1px 1px rgba(255,255,255,0.3) inset;
+    width: 20%;
+    padding: 2px 0;
+  }
+  
+  .detailtable td{
+    text-align: center;
+    border-left: 1px dotted #675950;
+    border-bottom: 1px dotted #675950;
+    border-top:none;
+    /* box-shadow: 0px -3px 5px 1px #eee inset; */
+    width: 20%;
+    padding: 2px 0;
+  }
+  
+  .detailtable td:first-child{
+    border-left: 1px solid #675950;
+  }
+  
+  .detailtable td:last-child{
+    border-right: 1px solid #675950;
+  }
+  
+  .detailtable tr:last-child{
+    border-bottom: 1px solid #675950;
+  }
+  
+  .detailtable tr:last-child td:first-child {
+    border-radius: 0 0 0 5px;
+  }
+  
+  .detailtable tr:last-child td:last-child {
+    border-radius: 0 0 5px 0;
+  }
+
+
+/*--------------------------------------------------------
+スマホ、タブレット用
+横幅600pxで切り替え
+--------------------------------------------------------*/
+@media screen and (max-width: 600px){
+#wrapper{
+width:auto
+}
+#menupage,#menu {
+position:relative
+}
+dt {
+float:none;
+width:auto
+}
+dd {
+margin:0 0 5px 0
+}
+}
+

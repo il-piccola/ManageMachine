@@ -1,0 +1,106 @@
+{% load static %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD html 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ja">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="content-style-type" content="text/css">
+<meta http-equiv="content-script-type" content="text/javascript">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ title }}</title>
+<link rel="stylesheet" href="{% static 'style.css' %}" type="text/css">
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+<!-- ▼全体の囲み▼ -->
+<div id="wrapper">
+
+<!-- この部分は非表示ですが消さずにサイト名やページ名を入れてください -->
+<h1>SITE NAME</h1>
+
+<!-- ▼枠▼ -->
+<div class="block">
+<div class="block-inner">
+<h2>{{ title }}</h2>
+<h3>{{ msg }}</h3>
+</div></div><!-- ▲枠▲ -->
+
+<!-- ▼内容▼ -->
+
+<table class="detailtable">
+    <tr>
+        {% for colname in df.columns %}
+        <th>{{ colname }}</th>
+        {% endfor %}
+    </tr>
+    {% for index, values in df.iterrows %}
+    <tr>
+        {% for item in values %}
+        <td>{{ item }}</td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+</table>
+
+<!-- ▼枠▼ -->
+{% if fig %}
+<div class="block">
+<div class="block-inner">
+    {% autoescape off %}
+    {{ fig }}
+    {% endautoescape %}
+</div></div>
+{% endif %}
+<!-- ▲枠▲ -->
+
+<form method="POST">
+{% csrf_token %}
+<div class="block">
+<div class="block-inner">
+<h3><div class="ln01">
+    【{{ order }}】が使用する印刷機を一括予約する(既に予約された情報は書き換えられます)
+</div></h3>
+<div class="ctrldiv">
+    <table><tr>
+    <td>期間指定:</td>
+    <td>
+        {% for field in autoform.hidden_fields %}{{ field }}{% endfor %}
+        {{ autoform.start }}～{{ autoform.end }}　　
+        <input type="submit" name="btn_auto" value="自動予約">
+    </td></tr>
+    <tr><td></td>
+    <td><span class="ctrlerr">{{ autoform.start.errors.0 }}{{ autoform.end.errors.0 }}</td>
+    </table>
+</div>
+<h3><div class="ln01">
+    既に予約された印刷機のスケジュールを修正、削除、または手動で新規登録する
+</div></h3>
+</form>
+<form method="POST">
+{% csrf_token %}
+<div class="ctrldiv">
+    {% for form in formset %}
+        号機名:{{ form.machine }}<span class="ctrlerr">{{ form.machine.errors.0 }}</span>　　
+        開始時刻:{{ form.start }}<span class="ctrlerr">{{ form.start.errors.0 }}</span>　　
+        終了時刻:{{ form.end }}<span class="ctrlerr">{{ form.end.errors.0 }}</span>
+        {% if form.instance.pk %}　　{{ form.DELETE }}:削除{% endif %}<!--既存データのみ削除ボックスを表示-->
+        {% for field in form.hidden_fields %}{{ field }}{% endfor %}<br><!--削除のためにHiddenFieldが必要-->
+    {% endfor %}
+    {{ formset.management_form }}
+    <input type="submit" name="btn_manual" value="手動登録">
+</div>
+</form>
+</div></div>
+
+<!-- ▲内容▲ -->
+    
+</div><!-- ▲全体の囲み▲ -->
+
+<!-- ページトップに戻る -->
+<a href="#" id="pagetop">top</a>
+
+<!-- jquery -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript" src="{% static 'jquery.scroll.js' %}"></script>
+</body>
+</html>

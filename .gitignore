@@ -1,0 +1,10 @@
+db.sqlite3
+media/csv/
+static/admin
+MachineInfo/__pycache__/
+MainMenu/__pycache__/
+ManageMachine/__pycache__/
+ManageMachine/migrations/__pycache__/
+OrderDetail/__pycache__/
+ReadCsv/__pycache__/
+Schedule/__pycache__/

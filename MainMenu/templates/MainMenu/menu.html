@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD html 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ja">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="content-style-type" content="text/css">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ sitename }}</title>
+<link rel="stylesheet" href="{% static 'style.css' %}" type="text/css">
+</head>
+<body id="menupage">
+
+<h1>{{ sitename }}</h1>
+<a href="http://foollovers.com" target="_blank">designed</a>
+
+<div id="menu-bg">
+<div id="menu">
+<!-- ▼メニュー▼ -->
+<!-- フレームで開くときは target="main" -->
+
+<ul id="nav" class="cf">
+<li class="bg01"><a href="{% url 'ReadCsv:upload' %}" target="main">Upload CSV</a>
+<li class="bg02"><a href="{% url 'ReadCsv:show' %}" target="main">Show CSV</a>
+<li class="bg01"><a href="{% url 'Schedule:show' %}" target="main">Schedule</a>
+<li class="bg02"><a href="{% url 'MachineInfo:show' %}" target="main">Machine Info</a>
+<li class="bg01"><a href="sample.html" target="main">sample01</a>
+<li class="bg02"><a href="sample02.html" target="main">sample02</a>
+</ul>
+
+</div></div>
+
+<!-- ▲メニュー▲ -->
+
+</body>
+</html>

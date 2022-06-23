@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD html 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ja">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="content-style-type" content="text/css">
+<meta http-equiv="content-script-type" content="text/javascript">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ title }}</title>
+<link rel="stylesheet" href="{% static 'style.css' %}" type="text/css">
+</head>
+<body>
+<!-- ▼全体の囲み▼ -->
+<div id="wrapper">
+
+<!-- この部分は非表示ですが消さずにサイト名やページ名を入れてください -->
+<h1>SITE NAME</h1>
+
+<!-- ▼枠▼ -->
+<div class="block">
+<div class="block-inner">
+<h2>{{ title }}</h2>
+<h3>{{ msg }}</h3>
+<form action="{% url 'ReadCsv:show' %}" method="POST" class="form-inline">
+    {% csrf_token %}
+        　　<b>受注番号検索</b>{{ form.search }}
+        　　<b>号機名</b>{{ form.machine }}
+        　　<b>ソート</b>{{ form.order }}{{ form.reverse }}
+        　　<input type="submit" value="検索">
+</form>
+</div></div><!-- ▲枠▲ -->
+
+<!-- ▼内容▼ -->
+
+<table class="detailtable">
+    <tr>
+        {% for colname in df.columns %}
+        <th>{{ colname }}</th>
+        {% endfor %}
+    </tr>
+    {% for index, values in df.iterrows %}
+    <tr>
+        {% for item in values %}
+        {% if forloop.counter == 1 %}
+        <td><a href="{% url 'OrderDetail:show' item %}">{{ item }}</a></td>
+        {% else %}
+        <td>{{ item }}</td>
+        {% endif %}
+        {% endfor %}
+    </tr>
+    {% endfor %}
+</table>
+
+<!-- ▲内容▲ -->
+    
+</div><!-- ▲全体の囲み▲ -->
+
+<!-- ページトップに戻る -->
+<a href="#" id="pagetop">top</a>
+
+<!-- jquery -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript" src="{% static 'jquery.scroll.js' %}"></script>
+</body>
+</html>

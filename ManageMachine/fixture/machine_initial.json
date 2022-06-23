@@ -1,0 +1,44 @@
+[
+    {
+        "model" : "ManageMachine.Machine",
+        "pk" : 0,
+        "fields" : {
+            "name" : "2号機"
+        }
+    },
+    {
+        "model" : "ManageMachine.Machine",
+        "pk" : 1,
+        "fields" : {
+            "name" : "4号機"
+        }
+    },
+    {
+        "model" : "ManageMachine.Machine",
+        "pk" : 2,
+        "fields" : {
+            "name" : "6号機"
+        }
+    },
+    {
+        "model" : "ManageMachine.Machine",
+        "pk" : 3,
+        "fields" : {
+            "name" : "7号機"
+        }
+    },
+    {
+        "model" : "ManageMachine.Machine",
+        "pk" : 4,
+        "fields" : {
+            "name" : "8号機"
+        }
+    },
+    {
+        "model" : "ManageMachine.Machine",
+        "pk" : 5,
+        "fields" : {
+            "name" : "グルアー"
+        }
+    }
+]

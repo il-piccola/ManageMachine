@@ -1,0 +1,602 @@
+[
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 0,
+        "fields" : {
+            "machine" : 0,
+            "weekday" : 0,
+            "start" : "09:00",
+            "end" : "12:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 1,
+        "fields" : {
+            "machine" : 0,
+            "weekday" : 0,
+            "start" : "13:00",
+            "end" : "18:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 2,
+        "fields" : {
+            "machine" : 0,
+            "weekday" : 1,
+            "start" : "09:00",
+            "end" : "12:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 3,
+        "fields" : {
+            "machine" : 0,
+            "weekday" : 1,
+            "start" : "13:00",
+            "end" : "18:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 4,
+        "fields" : {
+            "machine" : 0,
+            "weekday" : 2,
+            "start" : "09:00",
+            "end" : "12:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 5,
+        "fields" : {
+            "machine" : 0,
+            "weekday" : 2,
+            "start" : "13:00",
+            "end" : "18:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 6,
+        "fields" : {
+            "machine" : 0,
+            "weekday" : 3,
+            "start" : "09:00",
+            "end" : "12:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 7,
+        "fields" : {
+            "machine" : 0,
+            "weekday" : 3,
+            "start" : "13:00",
+            "end" : "18:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 8,
+        "fields" : {
+            "machine" : 0,
+            "weekday" : 4,
+            "start" : "09:00",
+            "end" : "12:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 9,
+        "fields" : {
+            "machine" : 0,
+            "weekday" : 4,
+            "start" : "13:00",
+            "end" : "18:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 10,
+        "fields" : {
+            "machine" : 1,
+            "weekday" : 0,
+            "start" : "09:00",
+            "end" : "12:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 11,
+        "fields" : {
+            "machine" : 1,
+            "weekday" : 0,
+            "start" : "13:00",
+            "end" : "18:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 12,
+        "fields" : {
+            "machine" : 1,
+            "weekday" : 1,
+            "start" : "09:00",
+            "end" : "12:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 13,
+        "fields" : {
+            "machine" : 1,
+            "weekday" : 1,
+            "start" : "13:00",
+            "end" : "18:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 14,
+        "fields" : {
+            "machine" : 1,
+            "weekday" : 2,
+            "start" : "09:00",
+            "end" : "12:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 15,
+        "fields" : {
+            "machine" : 1,
+            "weekday" : 2,
+            "start" : "13:00",
+            "end" : "18:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 16,
+        "fields" : {
+            "machine" : 1,
+            "weekday" : 3,
+            "start" : "09:00",
+            "end" : "12:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 17,
+        "fields" : {
+            "machine" : 1,
+            "weekday" : 3,
+            "start" : "13:00",
+            "end" : "18:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 18,
+        "fields" : {
+            "machine" : 1,
+            "weekday" : 4,
+            "start" : "09:00",
+            "end" : "12:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 19,
+        "fields" : {
+            "machine" : 1,
+            "weekday" : 4,
+            "start" : "13:00",
+            "end" : "18:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 20,
+        "fields" : {
+            "machine" : 2,
+            "weekday" : 0,
+            "start" : "09:00",
+            "end" : "12:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 21,
+        "fields" : {
+            "machine" : 2,
+            "weekday" : 0,
+            "start" : "13:00",
+            "end" : "18:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 22,
+        "fields" : {
+            "machine" : 2,
+            "weekday" : 1,
+            "start" : "09:00",
+            "end" : "12:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 23,
+        "fields" : {
+            "machine" : 2,
+            "weekday" : 1,
+            "start" : "13:00",
+            "end" : "18:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 24,
+        "fields" : {
+            "machine" : 2,
+            "weekday" : 2,
+            "start" : "09:00",
+            "end" : "12:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 25,
+        "fields" : {
+            "machine" : 2,
+            "weekday" : 2,
+            "start" : "13:00",
+            "end" : "18:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 26,
+        "fields" : {
+            "machine" : 2,
+            "weekday" : 3,
+            "start" : "09:00",
+            "end" : "12:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 27,
+        "fields" : {
+            "machine" : 2,
+            "weekday" : 3,
+            "start" : "13:00",
+            "end" : "18:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 28,
+        "fields" : {
+            "machine" : 2,
+            "weekday" : 4,
+            "start" : "09:00",
+            "end" : "12:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 29,
+        "fields" : {
+            "machine" : 2,
+            "weekday" : 4,
+            "start" : "13:00",
+            "end" : "18:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 30,
+        "fields" : {
+            "machine" : 3,
+            "weekday" : 0,
+            "start" : "09:00",
+            "end" : "12:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 31,
+        "fields" : {
+            "machine" : 3,
+            "weekday" : 0,
+            "start" : "13:00",
+            "end" : "18:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 32,
+        "fields" : {
+            "machine" : 3,
+            "weekday" : 1,
+            "start" : "09:00",
+            "end" : "12:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 33,
+        "fields" : {
+            "machine" : 3,
+            "weekday" : 1,
+            "start" : "13:00",
+            "end" : "18:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 34,
+        "fields" : {
+            "machine" : 3,
+            "weekday" : 2,
+            "start" : "09:00",
+            "end" : "12:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 35,
+        "fields" : {
+            "machine" : 3,
+            "weekday" : 2,
+            "start" : "13:00",
+            "end" : "18:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 36,
+        "fields" : {
+            "machine" : 3,
+            "weekday" : 3,
+            "start" : "09:00",
+            "end" : "12:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 37,
+        "fields" : {
+            "machine" : 3,
+            "weekday" : 3,
+            "start" : "13:00",
+            "end" : "18:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 38,
+        "fields" : {
+            "machine" : 3,
+            "weekday" : 4,
+            "start" : "09:00",
+            "end" : "12:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 39,
+        "fields" : {
+            "machine" : 3,
+            "weekday" : 4,
+            "start" : "13:00",
+            "end" : "18:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 40,
+        "fields" : {
+            "machine" : 4,
+            "weekday" : 0,
+            "start" : "09:00",
+            "end" : "12:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 41,
+        "fields" : {
+            "machine" : 4,
+            "weekday" : 0,
+            "start" : "13:00",
+            "end" : "18:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 42,
+        "fields" : {
+            "machine" : 4,
+            "weekday" : 1,
+            "start" : "09:00",
+            "end" : "12:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 43,
+        "fields" : {
+            "machine" : 4,
+            "weekday" : 1,
+            "start" : "13:00",
+            "end" : "18:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 44,
+        "fields" : {
+            "machine" : 4,
+            "weekday" : 2,
+            "start" : "09:00",
+            "end" : "12:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 45,
+        "fields" : {
+            "machine" : 4,
+            "weekday" : 2,
+            "start" : "13:00",
+            "end" : "18:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 46,
+        "fields" : {
+            "machine" : 4,
+            "weekday" : 3,
+            "start" : "09:00",
+            "end" : "12:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 47,
+        "fields" : {
+            "machine" : 4,
+            "weekday" : 3,
+            "start" : "13:00",
+            "end" : "18:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 48,
+        "fields" : {
+            "machine" : 4,
+            "weekday" : 4,
+            "start" : "09:00",
+            "end" : "12:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 49,
+        "fields" : {
+            "machine" : 4,
+            "weekday" : 4,
+            "start" : "13:00",
+            "end" : "18:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 50,
+        "fields" : {
+            "machine" : 5,
+            "weekday" : 0,
+            "start" : "09:00",
+            "end" : "12:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 51,
+        "fields" : {
+            "machine" : 5,
+            "weekday" : 0,
+            "start" : "13:00",
+            "end" : "18:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 52,
+        "fields" : {
+            "machine" : 5,
+            "weekday" : 1,
+            "start" : "09:00",
+            "end" : "12:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 53,
+        "fields" : {
+            "machine" : 5,
+            "weekday" : 1,
+            "start" : "13:00",
+            "end" : "18:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 54,
+        "fields" : {
+            "machine" : 5,
+            "weekday" : 2,
+            "start" : "09:00",
+            "end" : "12:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 55,
+        "fields" : {
+            "machine" : 5,
+            "weekday" : 2,
+            "start" : "13:00",
+            "end" : "18:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 56,
+        "fields" : {
+            "machine" : 5,
+            "weekday" : 3,
+            "start" : "09:00",
+            "end" : "12:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 57,
+        "fields" : {
+            "machine" : 5,
+            "weekday" : 3,
+            "start" : "13:00",
+            "end" : "18:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 58,
+        "fields" : {
+            "machine" : 5,
+            "weekday" : 4,
+            "start" : "09:00",
+            "end" : "12:00"
+        }
+    },
+    {
+        "model" : "ManageMachine.MachineTime",
+        "pk" : 59,
+        "fields" : {
+            "machine" : 5,
+            "weekday" : 4,
+            "start" : "13:00",
+            "end" : "18:00"
+        }
+    }
+]
