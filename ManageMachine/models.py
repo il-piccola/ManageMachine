@@ -66,21 +66,25 @@ class MachineTime(models.Model) :
         return WEEKDAY_NAME[self.weekday]
 
 def fromDawnTillDuskD(date) :
-    start = datetime.datetime.combine(date, datetime.time(hour=0, minute=0, second=0))
-    end = start.replace(hour=23, minute=59, second=59)
     machinetimes = MachineTime.objects.filter(weekday=date.weekday()).order_by('start')
-    if (machinetimes.count() > 0) :
-        first = machinetimes.first()
-        last = machinetimes.last()
-        start = start.replace(hour=first.start.hour, minute=first.start.minute)
-        start = start.astimezone(ZoneInfo('Asia/Tokyo'))
-        end = end.replace(hour=last.end.hour, minute=last.end.minute)
-        end = end.astimezone(ZoneInfo('Asia/Tokyo'))
+    if (machinetimes.count() <= 0) :
+        return []
+    first = machinetimes.first()
+    last = machinetimes.last()
+    start = date.replace(hour=first.start.hour, minute=first.start.minute)
+    start = start.astimezone(ZoneInfo('Asia/Tokyo'))
+    end = date.replace(hour=last.end.hour, minute=last.end.minute)
+    end = end.astimezone(ZoneInfo('Asia/Tokyo'))
     return [start, end]
 
 def fromDawnTillDuskSE(start, end) :
     slist = fromDawnTillDuskD(start)
+    if (len(slist)) <= 0 :
+        slist.append(start.replace(hour=0, minute=0, second=0))
     elist = fromDawnTillDuskD(end)
+    if (len(elist)) <= 0 :
+        elist.append(start)
+        elist.append(end.replace(hour=23, minute=59, second=59))
     return [slist[0], elist[1]]
 
 class Schedule(models.Model) :
@@ -105,19 +109,32 @@ def resetBranch(order) :
             schedule.save()
 
 def getScheduleTime(machine, start, minutes) :
-    ret = start
+    ret = getStartTimeOfDate(start)
     time = fromDawnTillDuskD(ret)
-    if (ret < time[0]) :   # そのままでは比較できないのでtimestamp()を使用
+    if (ret < time[0]) :
         ret = time[0]
     schedules = Schedule.objects.filter(machine=machine)
     while True :
         end = ret + minutes
         time = fromDawnTillDuskD(ret)
         if (end > time[1]) :
-            ret = fromDawnTillDuskD(ret + datetime.timedelta(days=1))[0]
+            ret = getStartTimeOfDate(end)
             end = ret + minutes
         schedules = Schedule.objects.filter(machine=machine, start__gte=start, end__lte=end).order_by('start')
         if (schedules.count() <= 0) :
             break
         ret = schedules.first().end
+    return ret
+
+def getStartTimeOfDate(date) :
+    ret = date
+    machinetimes = MachineTime.objects.filter(weekday=ret.weekday())
+    if (machinetimes.count() <= 0) :
+        while (machinetimes.count() <= 0) :
+            ret = ret + datetime.timedelta(days=1)
+            machinetimes = MachineTime.objects.filter(weekday=ret.weekday())
+        ret = fromDawnTillDuskD(ret)[0]
+    elif (ret > fromDawnTillDuskD(ret)[1]) :
+        ret = ret + datetime.timedelta(days=1)
+        ret = getStartTimeOfDate(ret)
     return ret
