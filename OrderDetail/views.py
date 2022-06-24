@@ -2,6 +2,7 @@ import datetime
 import math
 import numpy as np
 import pandas as pd
+from zoneinfo import ZoneInfo
 from django.shortcuts import render, redirect
 from plotly import express
 from plotly.offline import plot
@@ -35,7 +36,7 @@ def saveScheduleAuto(request, params, order, df) :
     autoform = AutoScheduleForm(data=request.POST)
     if (autoform.is_valid()) :
         Schedule.objects.filter(order=order).delete()
-        start = autoform.cleaned_data['start']
+        start = convertDateTimeAware(autoform.cleaned_data['start'])
         for index, row in df.iterrows() :
             machine = getMachineId(row[CSV_COL_NAME[1]])
             minutes = datetime.timedelta(minutes=np.ceil(row[CSV_COL_NAME[4]]))
@@ -45,8 +46,8 @@ def saveScheduleAuto(request, params, order, df) :
                 machine=Machine.objects.get(id=machine), 
                 order=order, 
                 branch=0, 
-                start=s, 
-                end=e
+                start=convertDateTimeNative(s), 
+                end=convertDateTimeNative(e)
             )
             start = e + datetime.timedelta(hours=1)     # 次の機械の予約は最低1時間後
         resetBranch(order)
@@ -54,6 +55,25 @@ def saveScheduleAuto(request, params, order, df) :
     else :
         params['msg'] = '自動予約の情報入力に誤りがあります'
     params['autoform'] = autoform
+
+def convertDateTimeAware(date) :
+    return datetime.datetime(
+        date.year,
+        date.month,
+        date.day,
+        date.hour,
+        date.minute,
+        tzinfo=ZoneInfo('Asia/Tokyo')
+    )
+
+def convertDateTimeNative(date) :
+    return datetime.datetime(
+        date.year,
+        date.month,
+        date.day,
+        date.hour,
+        date.minute
+    )
 
 def saveScheduleManual(request, params, order) :
     formset = ScheduleFormSet(request.POST or None)

@@ -105,19 +105,15 @@ def resetBranch(order) :
             schedule.save()
 
 def getScheduleTime(machine, start, minutes) :
-    ret = start.astimezone(ZoneInfo('Asia/Tokyo'))
+    ret = start
     time = fromDawnTillDuskD(ret)
-    print('ret', ret, ret.timestamp())
-    print('time', time[0], time[0].timestamp())
-    if (ret.timestamp() < time[0].timestamp()) :   # そのままでは比較できないのでtimestamp()を使用
+    if (ret < time[0]) :   # そのままでは比較できないのでtimestamp()を使用
         ret = time[0]
     schedules = Schedule.objects.filter(machine=machine)
     while True :
-        end = (ret + minutes).astimezone(ZoneInfo('Asia/Tokyo'))
+        end = ret + minutes
         time = fromDawnTillDuskD(ret)
-        if (end.timestamp() > time[1].timestamp()) :
-            print('end', end, end.timestamp())
-            print('time', time[1], time[1].timestamp())
+        if (end > time[1]) :
             ret = fromDawnTillDuskD(ret + datetime.timedelta(days=1))[0]
             end = ret + minutes
         schedules = Schedule.objects.filter(machine=machine, start__gte=start, end__lte=end).order_by('start')
