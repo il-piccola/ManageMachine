@@ -95,7 +95,13 @@ class Schedule(models.Model) :
     end = models.DateTimeField('終了日時', null=False)
 
 def isReservedDate(machine, order, branch, date) :
-    schedules = Schedule.objects.filter(machine=machine, start__lt=date, end__gt=date).filter(~Q(order=order) & ~Q(branch=branch))
+    q = Q()
+    q.add(Q(machine=machine), Q.AND)
+    q.add(~Q(order=order), Q.AND)
+    q.add(~Q(branch=branch), Q.AND)
+    q.add(Q(start__lt=date), Q.AND)
+    q.add(Q(end__gt=date), Q.AND)
+    schedules = Schedule.objects.filter(q)
     if (schedules.count() > 0) :
         return True
     return False

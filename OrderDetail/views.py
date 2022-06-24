@@ -61,17 +61,16 @@ def getScheduleTime(machine, start, minutes) :
     time = fromDawnTillDuskD(ret)
     if (ret < time[0]) :
         ret = time[0]
-    schedules = Schedule.objects.filter(machine=machine)
     while True :
         end = ret + minutes
         time = fromDawnTillDuskD(ret)
         if (end > time[1]) :
             ret = getStartTimeOfDate(end)
             end = ret + minutes
-        schedules = Schedule.objects.filter(machine=machine, start__gte=start, end__lte=end).order_by('start')
+        schedules = Schedule.objects.filter(machine=machine, start__gte=start, end__lte=end)
         if (schedules.count() <= 0) :
             break
-        ret = schedules.first().end
+        ret = schedules.order_by('start').first().end
     return ret
 
 def getStartTimeOfDate(date) :
