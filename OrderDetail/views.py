@@ -79,11 +79,11 @@ def getStartTimeOfDate(date) :
     machinetimes = MachineTime.objects.filter(weekday=ret.weekday())
     if (machinetimes.count() <= 0) :
         while (machinetimes.count() <= 0) :
-            ret = ret + datetime.timedelta(days=1)
+            ret = getNextDay(ret)
             machinetimes = MachineTime.objects.filter(weekday=ret.weekday())
         ret = fromDawnTillDuskD(ret)[0]
     elif (ret > fromDawnTillDuskD(ret)[1]) :
-        ret = (ret + datetime.timedelta(days=1)).replace(hour=0, minute=0, second=0)
+        ret = getNextDay(ret)
         ret = getStartTimeOfDate(ret)
     return ret
 

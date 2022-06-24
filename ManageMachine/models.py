@@ -126,3 +126,6 @@ def convertDateTimeNative(date) :
         date.hour,
         date.minute
     )
+
+def getNextDay(date) :
+    return (date + datetime.timedelta(days=1)).replace(hour=0, minute=0, second=0)
