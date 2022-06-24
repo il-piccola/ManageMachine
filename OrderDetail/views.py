@@ -56,24 +56,36 @@ def saveScheduleAuto(request, params, order, df) :
         params['msg'] = '自動予約の情報入力に誤りがあります'
     params['autoform'] = autoform
 
-def convertDateTimeAware(date) :
-    return datetime.datetime(
-        date.year,
-        date.month,
-        date.day,
-        date.hour,
-        date.minute,
-        tzinfo=ZoneInfo('Asia/Tokyo')
-    )
+def getScheduleTime(machine, start, minutes) :
+    ret = getStartTimeOfDate(start)
+    time = fromDawnTillDuskD(ret)
+    if (ret < time[0]) :
+        ret = time[0]
+    schedules = Schedule.objects.filter(machine=machine)
+    while True :
+        end = ret + minutes
+        time = fromDawnTillDuskD(ret)
+        if (end > time[1]) :
+            ret = getStartTimeOfDate(end)
+            end = ret + minutes
+        schedules = Schedule.objects.filter(machine=machine, start__gte=start, end__lte=end).order_by('start')
+        if (schedules.count() <= 0) :
+            break
+        ret = schedules.first().end
+    return ret
 
-def convertDateTimeNative(date) :
-    return datetime.datetime(
-        date.year,
-        date.month,
-        date.day,
-        date.hour,
-        date.minute
-    )
+def getStartTimeOfDate(date) :
+    ret = date
+    machinetimes = MachineTime.objects.filter(weekday=ret.weekday())
+    if (machinetimes.count() <= 0) :
+        while (machinetimes.count() <= 0) :
+            ret = ret + datetime.timedelta(days=1)
+            machinetimes = MachineTime.objects.filter(weekday=ret.weekday())
+        ret = fromDawnTillDuskD(ret)[0]
+    elif (ret > fromDawnTillDuskD(ret)[1]) :
+        ret = (ret + datetime.timedelta(days=1)).replace(hour=0, minute=0, second=0)
+        ret = getStartTimeOfDate(ret)
+    return ret
 
 def saveScheduleManual(request, params, order) :
     formset = ScheduleFormSet(request.POST or None)

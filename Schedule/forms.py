@@ -29,8 +29,7 @@ class SearchForm(forms.Form) :
     )
     def __init__(self, *args, **kwargs) :
         super(SearchForm, self).__init__(*args, **kwargs)
-        date = datetime.date.today()
-        time = fromDawnTillDuskD(date)
-        self.initial['date'] = date.strftime("%Y-%m-%d")
+        time = fromDawnTillDuskD(datetime.datetime.now())
+        self.initial['date'] = time[0].strftime("%Y-%m-%d")
         self.initial['start'] = time[0].strftime("%H:%M")
         self.initial['end'] = time[1].strftime("%H:%M")
