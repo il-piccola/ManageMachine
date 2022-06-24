@@ -5,7 +5,7 @@ from zoneinfo import ZoneInfo
 from django.db import models
 from django.utils import timezone
 from django.core.validators import FileExtensionValidator
-from django.db.models import Max
+from django.db.models import Q
 from ManageMachine.settings import *
 
 def getUploadPath(instance, filename) :
@@ -94,8 +94,8 @@ class Schedule(models.Model) :
     start = models.DateTimeField('開始日時', null=False)
     end = models.DateTimeField('終了日時', null=False)
 
-def isReservedDate(machine, date) :
-    schedules = Schedule.objects.filter(machine=machine, start__lt=date, end__gt=date)
+def isReservedDate(machine, order, branch, date) :
+    schedules = Schedule.objects.filter(machine=machine, start__lt=date, end__gt=date).filter(~Q(order=order) & ~Q(branch=branch))
     if (schedules.count() > 0) :
         return True
     return False
