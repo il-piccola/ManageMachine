@@ -35,12 +35,16 @@
 
 <table class="detailtable">
     <tr>
+        <th></th>
         {% for colname in df.columns %}
         <th>{{ colname }}</th>
         {% endfor %}
     </tr>
     {% for index, values in df.iterrows %}
     <tr>
+        <td>
+            <input type="checkbox" name="check" value="{{ index }}">
+        </td>
         {% for item in values %}
         {% if forloop.counter == 1 %}
         <td><a href="{% url 'OrderDetail:show' item %}">{{ item }}</a></td>

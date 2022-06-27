@@ -23,9 +23,11 @@ def show(request, order) :
     if (request.method == 'POST' and 'btn_auto' in request.POST) :
         saveScheduleAuto(request, params, order, df)
         params['formset'] = makeScheduleFormSet(order)
+        params['df'] = getDetail(order)
     elif (request.method == 'POST' and 'btn_manual' in request.POST) :
         saveScheduleManual(request, params, order)
         params['autoform'] = AutoScheduleForm(initial=initial)
+        params['df'] = getDetail(order)
     else :
         params['autoform'] = AutoScheduleForm(initial=initial)
         params['formset'] = makeScheduleFormSet(order)

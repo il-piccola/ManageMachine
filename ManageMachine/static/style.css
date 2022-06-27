@@ -272,7 +272,7 @@ height:1px
     border-top: 1px solid #675950;
     border-bottom: 1px solid #675950;
     box-shadow: 0px 1px 1px rgba(255,255,255,0.3) inset;
-    width: 20%;
+    /* width: 20%; */
     padding: 2px 0;
   }
   
@@ -282,7 +282,7 @@ height:1px
     border-bottom: 1px dotted #675950;
     border-top:none;
     /* box-shadow: 0px -3px 5px 1px #eee inset; */
-    width: 20%;
+    /* width: 20%; */
     padding: 2px 0;
   }
   
