@@ -11,7 +11,7 @@ def show(request) :
     if (request.method != 'POST') :
         params['form'] = SearchForm(datetime=datetime.datetime.now())
         return render(request, 'Schedule/show.html', params)
-    form = SearchForm(data=request.POST)
+    form = SearchForm(data=request.POST, datetime=datetime.datetime.now())
     if (form.is_valid()) :
         machine = form.cleaned_data['machine']
         date = form.cleaned_data['date']
