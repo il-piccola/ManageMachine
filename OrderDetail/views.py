@@ -31,12 +31,17 @@ def show(request, order) :
         params['formset'] = makeScheduleFormSet(order)
     return render(request, 'OrderDetail/show.html', params)
 
-def getDetail(number) :
+def getDetail(order) :
     df = readCsv()
     if not df.empty :
-        df = df[df[CSV_COL_NAME[0]] == number]
+        df = df[df[CSV_COL_NAME[0]] == order]
         df.sort_values(CSV_COL_NAME[2], inplace=True)
         df.reset_index(drop=True, inplace=True)
+        flg = []
+        for index, row in df.iterrows() :
+            machine = getMachineId(row[CSV_COL_NAME[1]])
+            flg.append(Schedule.objects.filter(order=order, machine=machine).exists())
+        df['flg'] = flg
     return df
 
 def makeGanttChartHtml(df) :

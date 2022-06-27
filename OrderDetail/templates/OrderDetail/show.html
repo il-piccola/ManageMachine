@@ -30,15 +30,17 @@
 <table class="detailtable">
     <tr>
         {% for colname in df.columns %}
+        {% if forloop.counter != 6 %}
         <th>{{ colname }}</th>
+        {% endif %}
         {% endfor %}
     </tr>
     {% for index, values in df.iterrows %}
     <tr>
         {% for item in values %}
-        {% if forloop.counter == 2 %}
+        {% if forloop.counter == 2 and values.5 %}
         <td><a href="{% url 'Schedule:showFromOrder' order item %}">{{ item }}</a></td>
-        {% else %}
+        {% elif forloop.counter != 6 %}
         <td>{{ item }}</td>
         {% endif %}
         {% endfor %}
