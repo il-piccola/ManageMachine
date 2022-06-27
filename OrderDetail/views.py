@@ -8,7 +8,6 @@ from plotly.offline import plot
 from ManageMachine.settings import *
 from ManageMachine.models import *
 from .forms import *
-from django_pandas.io import read_frame
 
 def show(request, order) :
     df = getDetail(order)
@@ -120,7 +119,6 @@ def getScheduleTime(machine, start, minutes) :
             ret = getStartTimeOfDate(end)
             end = ret + minutes
         schedules = getSchedulesInTerm(machine, ret, end)
-        print('ret:', ret, 'end:', end)
         if (schedules.count() <= 0) :
             break
         ret = convertDateTimeAware(schedules.order_by('end').last().end)
@@ -159,13 +157,6 @@ def getSchedulesInTerm(machine, start, end) :
     schedules1 = Schedule.objects.filter(q1)
     schedules2 = Schedule.objects.filter(q2)
     schedules3 = Schedule.objects.filter(q3)
-    print('machine:', Machine.objects.get(id=machine).name, 'start:', s, 'end:', e)
-    print('schedules1')
-    print(read_frame(schedules1))
-    print('schedules2')
-    print(read_frame(schedules2))
-    print('schedules3')
-    print(read_frame(schedules3))
     return (schedules1|schedules2|schedules3)
 
 def saveScheduleManual(request, params, order) :

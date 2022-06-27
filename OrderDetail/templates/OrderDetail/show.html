@@ -36,7 +36,11 @@
     {% for index, values in df.iterrows %}
     <tr>
         {% for item in values %}
+        {% if forloop.counter == 2 %}
+        <td><a href="{% url 'Schedule:showFromOrder' order item %}">{{ item }}</a></td>
+        {% else %}
         <td>{{ item }}</td>
+        {% endif %}
         {% endfor %}
     </tr>
     {% endfor %}
