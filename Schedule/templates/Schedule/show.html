@@ -25,7 +25,7 @@
 <h3>{{ msg }}</h3>
 <form action="{% url 'Schedule:show' %}" method="POST" class="form-inline">
     {% csrf_token %}
-        　　<b>号機名</b>{{ form.machine }}
+        　　{% for m in form.machines %}{{ m }}{% endfor %}
         　　<b>日付</b>{{ form.date }}　{{ form.start }}～{{ form.end }}
         　　<input type="submit" value="表示">
 </form>
@@ -34,18 +34,19 @@
 
 <!-- ▼内容▼ -->
 
+{% for schedule in schedules %}
+{% if schedule.isModelExists %}
 <!-- ▼枠▼ -->
-{% if fig %}
 <div class="block">
 <div class="block-inner">
+    <h3><div class="ln01">
+        {{ schedule.getMachineName }}
+    </div></h3>
     {% autoescape off %}
-    {{ fig }}
+    {{ schedule.fig }}
     {% endautoescape %}
 </div></div>
-{% endif %}
 <!-- ▲枠▲ -->
-    
-{% if models %}
 <table class="detailtable">
     <tr>
         <th>号機名</th>
@@ -54,7 +55,7 @@
         <th>開始時刻</th>
         <th>終了時刻</th>
     </tr>
-    {% for model in models %}
+    {% for model in schedule.models %}
     <tr>
         <td>{{ model.machine.name }}</td>
         <td><a href="{% url 'OrderDetail:show' model.order %}">{{ model.order }}</a></td>
@@ -65,6 +66,7 @@
     {% endfor %}
 </table>
 {% endif %}
+{% endfor %}
 
 <!-- ▲内容▲ -->
     
