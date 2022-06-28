@@ -138,6 +138,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # インラインフレームを許可するための設定
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
+# 一度に送れるフォームフィールドの数
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 100000
+
 # サイト名
 SITE_NAME = '印刷機予約システム'
 

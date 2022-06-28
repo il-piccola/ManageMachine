@@ -114,6 +114,55 @@ def resetBranch(order) :
             schedule.branch = i+1
             schedule.save()
 
+def getScheduleTime(machine, start, minutes) :
+    ret = getStartTimeOfDate(start)
+    while True :
+        end = ret + minutes
+        time = fromDawnTillDuskD(ret)
+        if (end > time[1]) :
+            ret = getStartTimeOfDate(end)
+            end = ret + minutes
+        schedules = getSchedulesInTerm(machine, ret, end)
+        if (schedules.count() <= 0) :
+            break
+        ret = convertDateTimeAware(schedules.order_by('end').last().end)
+    return ret
+
+def getStartTimeOfDate(date) :
+    ret = date
+    machinetimes = MachineTime.objects.filter(weekday=ret.weekday())
+    if (machinetimes.count() <= 0) :
+        while (machinetimes.count() <= 0) :
+            ret = getNextDay(ret)
+            machinetimes = MachineTime.objects.filter(weekday=ret.weekday())
+        ret = fromDawnTillDuskD(ret)[0]
+    elif (ret > fromDawnTillDuskD(ret)[1]) :
+        ret = getNextDay(ret)
+        ret = getStartTimeOfDate(ret)
+    elif (ret < fromDawnTillDuskD(ret)[0]) :
+        ret = fromDawnTillDuskD(ret)[0]
+    return ret
+
+def getSchedulesInTerm(machine, start, end) :
+    s = convertDateTimeNative(start)
+    e = convertDateTimeNative(end)
+    q1 = Q()
+    q1.add(Q(machine=machine), Q.AND)
+    q1.add(Q(start__lte=s), Q.AND)
+    q1.add(Q(end__gt=s), Q.AND)
+    q2 = Q()
+    q2.add(Q(machine=machine), Q.AND)
+    q2.add(Q(start__lt=e), Q.AND)
+    q2.add(Q(end__gte=e), Q.AND)
+    q3 = Q()
+    q3.add(Q(machine=machine), Q.AND)
+    q3.add(Q(start__gte=s), Q.AND)
+    q3.add(Q(end__lte=e), Q.AND)
+    schedules1 = Schedule.objects.filter(q1)
+    schedules2 = Schedule.objects.filter(q2)
+    schedules3 = Schedule.objects.filter(q3)
+    return (schedules1|schedules2|schedules3)
+
 def convertDateTimeAware(date) :
     return datetime.datetime(
         date.year,

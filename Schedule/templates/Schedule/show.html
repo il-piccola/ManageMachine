@@ -25,9 +25,11 @@
 <h3>{{ msg }}</h3>
 <form action="{% url 'Schedule:show' %}" method="POST" class="form-inline">
     {% csrf_token %}
-        　　{% for m in form.machines %}{{ m }}{% endfor %}
+        {% for m in form.machines %}{{ m }}{% endfor %}
         　　<b>期間：</b>{{ form.start }}～{{ form.end }}
-        　　<input type="submit" value="表示">
+        　　<input type="submit" value="表示" name="btn_search">
+        　　　　<input type="submit" value="予約全削除" name="btn_delete">
+        <span class="ctrlerr">{{ form.end.errors.0 }}</span>
 </form>
 </div></div>
 <!-- ▲枠▲ -->

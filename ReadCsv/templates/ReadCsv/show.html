@@ -24,18 +24,19 @@
 <h3>{{ msg }}</h3>
 <form action="{% url 'ReadCsv:show' %}" method="POST" class="form-inline">
     {% csrf_token %}
-        　　<b>受注番号検索</b>{{ form.search }}
-        　　<b>号機名</b>{{ form.machine }}
-        　　<b>ソート</b>{{ form.order }}{{ form.reverse }}
-        　　<input type="submit" value="検索">
-</form>
-</div></div><!-- ▲枠▲ -->
+        <b>受注番号検索</b>{{ form.search }}
+        <b>号機名</b>{{ form.machine }}
+        <b>ソート</b>{{ form.order }}{{ form.reverse }}
+        <input type="submit" value="検索" name="btn_search">
+        　　　　<input type="submit" value="一括予約" name="btn_regist">
+</div></div>
+<!-- ▲枠▲ -->
 
 <!-- ▼内容▼ -->
 
 <table class="detailtable">
     <tr>
-        <th></th>
+        <th><input id="checkAll" type="checkbox" name="lang" value="checkall"></th>
         {% for colname in df.columns %}
         <th>{{ colname }}</th>
         {% endfor %}
@@ -55,6 +56,7 @@
     </tr>
     {% endfor %}
 </table>
+</form>
 
 <!-- ▲内容▲ -->
     
@@ -66,5 +68,6 @@
 <!-- jquery -->
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script type="text/javascript" src="{% static 'jquery.scroll.js' %}"></script>
+<script type="text/javascript" src="{% static 'checkall.js' %}"></script>
 </body>
 </html>

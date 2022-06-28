@@ -46,29 +46,29 @@ class MachineSchedule() :
             color=PLOTLY_COL_NAME[0],
             height=(len(df)*15+150),
             range_x=[self.start, self.end])
-        fig.update_xaxes(tickformat="%H:%M")
+        # fig.update_xaxes(tickformat="%H:%M")
         return plot(fig, output_type='div', include_plotlyjs=False)
 
 def show(request) :
     params = getTitleAndMsg()
+    machines = []
     time = fromDawnTillDuskD(convertDateTimeAware(datetime.datetime.now()))
     start = time[0]
     end = time[1]
-    machines = []
-    if (request.method != 'POST') :
+    if (request.method == 'POST' and 'btn_delete' in request.POST) :
+        Schedule.objects.all().delete()
+        params['form'] = SearchForm(data=request.POST)
+    elif (request.method != 'POST') :
         for machine in Machine.objects.all() :
             machines.append(str(machine.id))
         initial = {
             'machines' : machines,
-            'start' : datetime.datetime.strftime(time[0], "%Y-%m-%dT%H:%M"),
-            'end' : datetime.datetime.strftime(time[1], "%Y-%m-%dT%H:%M")
+            'start' : datetime.datetime.strftime(start, "%Y-%m-%dT%H:%M"),
+            'end' : datetime.datetime.strftime(end, "%Y-%m-%dT%H:%M")
         }
         params['form'] = SearchForm(initial=initial)
     else :
         form = SearchForm(data=request.POST)
-        machines = request.POST.getlist('machines')
-        start = datetime.datetime.strptime(request.POST.get('start'), "%Y-%m-%dT%H:%M")
-        end = datetime.datetime.strptime(request.POST.get('end'), "%Y-%m-%dT%H:%M")
         if (form.is_valid()) :
             machines = form.cleaned_data['machines']
             start = form.cleaned_data['start']
@@ -94,4 +94,23 @@ def showFromOrder(request, order, name) :
         'end' : datetime.datetime.strftime(time[1], "%Y-%m-%dT%H:%M")
     }
     params['form'] = SearchForm(initial=initial)
+    return render(request, 'Schedule/show.html', params)
+
+def showFromTerm(request, start, end) :
+    params = getTitleAndMsg()
+    s = datetime.datetime.strptime(start, "%Y-%m-%dT%H:%M")
+    e = datetime.datetime.strptime(end, "%Y-%m-%dT%H:%M")
+    machines = []
+    for machine in Machine.objects.all() :
+        machines.append(str(machine.id))
+    initial = {
+        'machines' : machines,
+        'start' : start,
+        'end' : end
+    }
+    params['form'] = SearchForm(initial=initial)
+    machineScheduleList = []
+    for machine in machines :
+        machineScheduleList.append(MachineSchedule(machine, s, e))
+    params['schedules'] = machineScheduleList
     return render(request, 'Schedule/show.html', params)

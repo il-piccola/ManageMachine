@@ -16,11 +16,17 @@ class SearchForm(forms.Form) :
         label=CSV_COL_NAME[1],
         choices=getMachineMenu(),
         widget=forms.CheckboxSelectMultiple())
-    start = forms.TimeField(
+    start = forms.DateTimeField(
         label='',
         widget=forms.DateTimeInput(attrs={"type":"datetime-local"})
     )
-    end = forms.TimeField(
+    end = forms.DateTimeField(
         label='',
         widget=forms.DateTimeInput(attrs={"type":"datetime-local"})
     )
+    def clean_end(self) :
+        end = self.cleaned_data['end']
+        start = self.cleaned_data['start']
+        if (end < start) :
+            raise forms.ValidationError('終了日時に開始日時より前の日時は指定できません。')
+        return end
