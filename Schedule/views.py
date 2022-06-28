@@ -51,20 +51,33 @@ class MachineSchedule() :
 
 def show(request) :
     params = getTitleAndMsg()
+    time = fromDawnTillDuskD(convertDateTimeAware(datetime.datetime.now()))
+    start = time[0]
+    end = time[1]
+    machines = []
     if (request.method != 'POST') :
-        params['form'] = SearchForm(datetime=datetime.datetime.now())
-        return render(request, 'Schedule/show.html', params)
-    form = SearchForm(data=request.POST, datetime=datetime.datetime.now())
-    if (form.is_valid()) :
-        machines = form.cleaned_data['machines']
-        date = form.cleaned_data['date']
-        start = datetime.datetime.combine(date, form.cleaned_data['start'])
-        end = datetime.datetime.combine(date, form.cleaned_data['end'])
-        machineScheduleList = []
-        for machine in machines :
-            machineScheduleList.append(MachineSchedule(machine, start, end))
-        params['schedules'] = machineScheduleList
-    params['form'] = form
+        for machine in Machine.objects.all() :
+            machines.append(str(machine.id))
+        initial = {
+            'machines' : machines,
+            'start' : datetime.datetime.strftime(time[0], "%Y-%m-%dT%H:%M"),
+            'end' : datetime.datetime.strftime(time[1], "%Y-%m-%dT%H:%M")
+        }
+        params['form'] = SearchForm(initial=initial)
+    else :
+        form = SearchForm(data=request.POST)
+        machines = request.POST.getlist('machines')
+        start = datetime.datetime.strptime(request.POST.get('start'), "%Y-%m-%dT%H:%M")
+        end = datetime.datetime.strptime(request.POST.get('end'), "%Y-%m-%dT%H:%M")
+        if (form.is_valid()) :
+            machines = form.cleaned_data['machines']
+            start = form.cleaned_data['start']
+            end = form.cleaned_data['end']
+        params['form'] = form
+    machineScheduleList = []
+    for machine in machines :
+        machineScheduleList.append(MachineSchedule(machine, start, end))
+    params['schedules'] = machineScheduleList
     return render(request, 'Schedule/show.html', params)
 
 def showFromOrder(request, order, name) :
@@ -75,5 +88,10 @@ def showFromOrder(request, order, name) :
         return redirect('Schedule:show')
     time = fromDawnTillDuskD(convertDateTimeAware(schedules.first().start))
     params['schedules'] = [MachineSchedule(str(machine), time[0], time[1])]
-    params['form'] = SearchForm(initial={'machines':[str(machine)]}, datetime=time[0])
+    initial = {
+        'machines' : [str(machine)],
+        'start' : datetime.datetime.strftime(time[0], "%Y-%m-%dT%H:%M"),
+        'end' : datetime.datetime.strftime(time[1], "%Y-%m-%dT%H:%M")
+    }
+    params['form'] = SearchForm(initial=initial)
     return render(request, 'Schedule/show.html', params)

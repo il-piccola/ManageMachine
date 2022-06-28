@@ -16,21 +16,11 @@ class SearchForm(forms.Form) :
         label=CSV_COL_NAME[1],
         choices=getMachineMenu(),
         widget=forms.CheckboxSelectMultiple())
-    date = forms.DateField(
-        label='日付',
-        widget=forms.DateInput(attrs={"type":"date"})
-    )
     start = forms.TimeField(
         label='',
-        widget=forms.TimeInput(attrs={"type":"time"})
+        widget=forms.DateTimeInput(attrs={"type":"datetime-local"})
     )
     end = forms.TimeField(
         label='',
-        widget=forms.TimeInput(attrs={"type":"time"})
+        widget=forms.DateTimeInput(attrs={"type":"datetime-local"})
     )
-    def __init__(self, datetime, *args, **kwargs) :
-        super(SearchForm, self).__init__(*args, **kwargs)
-        time = fromDawnTillDuskD(datetime)
-        self.initial['date'] = time[0].strftime("%Y-%m-%d")
-        self.initial['start'] = time[0].strftime("%H:%M")
-        self.initial['end'] = time[1].strftime("%H:%M")

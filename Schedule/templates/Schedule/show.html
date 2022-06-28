@@ -26,7 +26,7 @@
 <form action="{% url 'Schedule:show' %}" method="POST" class="form-inline">
     {% csrf_token %}
         　　{% for m in form.machines %}{{ m }}{% endfor %}
-        　　<b>日付</b>{{ form.date }}　{{ form.start }}～{{ form.end }}
+        　　<b>期間：</b>{{ form.start }}～{{ form.end }}
         　　<input type="submit" value="表示">
 </form>
 </div></div>
