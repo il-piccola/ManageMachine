@@ -1,6 +1,7 @@
 from django import forms
 from ManageMachine.settings import *
 from ManageMachine.models import *
+from ManageMachine.utils import *
 
 class UploadForm(forms.ModelForm) :
     class Meta :

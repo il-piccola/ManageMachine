@@ -1,10 +1,7 @@
-import datetime
-from email.policy import default
-from turtle import filling
-from typing import Iterable
 from django import forms
 from ManageMachine.settings import *
 from ManageMachine.models import *
+from ManageMachine.utils import *
 
 class SearchForm(forms.Form) :
     def getMachineMenu() :

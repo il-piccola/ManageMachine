@@ -1,4 +1,3 @@
-from typing import Iterable
 from django import forms
 from ManageMachine.settings import *
 from ManageMachine.models import *

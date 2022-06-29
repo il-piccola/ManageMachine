@@ -4,6 +4,7 @@ from django_pandas.io import read_frame
 from plotly import express
 from plotly.offline import plot
 from ManageMachine.models import *
+from ManageMachine.utils import *
 from .forms import *
 
 def getTitleAndMsg() :
@@ -57,7 +58,7 @@ def show(request) :
     end = time[1]
     if (request.method == 'POST' and 'btn_delete' in request.POST) :
         Schedule.objects.all().delete()
-        params['form'] = SearchForm(data=request.POST)
+        return redirect('Schedule:show')
     elif (request.method != 'POST') :
         for machine in Machine.objects.all() :
             machines.append(str(machine.id))

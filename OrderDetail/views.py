@@ -2,11 +2,12 @@ import datetime
 import math
 import numpy as np
 import pandas as pd
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from plotly import express
 from plotly.offline import plot
 from ManageMachine.settings import *
 from ManageMachine.models import *
+from ManageMachine.utils import *
 from .forms import *
 
 def show(request, order) :

@@ -1,9 +1,9 @@
 import numpy as np
-import pandas as pd
 from zoneinfo import ZoneInfo
 from django.shortcuts import render, redirect
 from ManageMachine.settings import *
 from ManageMachine.models import *
+from ManageMachine.utils import *
 from .forms import *
 
 def upload(request) :

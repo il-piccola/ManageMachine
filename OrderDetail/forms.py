@@ -1,8 +1,8 @@
 import datetime
-from unicodedata import decimal
 from django import forms
 from ManageMachine.settings import *
 from ManageMachine.models import *
+from ManageMachine.utils import *
 
 class AutoScheduleForm(forms.Form) :
     order = forms.CharField(
