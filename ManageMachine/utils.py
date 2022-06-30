@@ -149,3 +149,17 @@ def convertDateTimeNative(date) :
 
 def getNextDay(date) :
     return (date + datetime.timedelta(days=1)).replace(hour=0, minute=0, second=0)
+
+def getHourMinFromTimedelta(minutes) :
+    timedelta = datetime.timedelta(minutes=minutes)
+    minutes, seconds = divmod(timedelta.seconds, 60)
+    hours, minutes = divmod(minutes, 60)
+    return hours, minutes
+
+def getTermStr(hours, minutes) :
+    ret = ''
+    if hours > 0 :
+        ret = ret + str(hours) + "時間"
+    if minutes > 0 :
+        ret = ret + str(minutes) + "分"
+    return ret

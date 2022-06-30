@@ -19,6 +19,7 @@ def show(request, order) :
         'msg' : CSV_COL_NAME[0] + '【' + order + '】の詳細を表示します',
         'order' : order,
         'df' : df,
+        'term' : getTerm(df),
         'fig' : fig,
     }
     if (request.method == 'POST' and 'btn_auto' in request.POST) :
@@ -46,6 +47,18 @@ def getDetail(order) :
             flg.append(Schedule.objects.filter(order=order, machine=machine).exists())
         df['flg'] = flg
     return df
+
+def getTerm(df) :
+    hours, minutes = getHourMinFromTimedelta(df[CSV_COL_NAME[4]].sum())
+    ret = getTermStr(hours, minutes)
+    ret = ret + "("
+    for index, row in df.iterrows() :
+        hours, minutes = getHourMinFromTimedelta(row[CSV_COL_NAME[4]])
+        ret = ret + row[CSV_COL_NAME[1]] + "：" + getTermStr(hours, minutes)
+        if (index < len(df)-1) :
+            ret = ret + ","
+    ret = ret + ")"
+    return ret
 
 def makeGanttChartHtml(df) :
     # 号機名に対応する序数列を追加しソート
