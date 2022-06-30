@@ -1,5 +1,3 @@
-db.sqlite3
-media/csv/
 static/admin
 MachineInfo/__pycache__/
 MainMenu/__pycache__/
