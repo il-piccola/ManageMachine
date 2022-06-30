@@ -1,0 +1,24 @@
+[
+    {
+        "model" : "ManageMachine.User",
+        "pk" : 0,
+        "fields" : {
+            "userid" : "admin",
+            "password" : "admin",
+            "name" : "管理者",
+            "email" : "il.piccola.estate@gmail.com",
+            "admin" : "True"
+        }
+    },
+    {
+        "model" : "ManageMachine.User",
+        "pk" : 1,
+        "fields" : {
+            "userid" : "guest",
+            "password" : "guest",
+            "name" : "ゲスト",
+            "email" : "il.piccola.estate@gmail.com",
+            "admin" : "False"
+        }
+    }
+]
