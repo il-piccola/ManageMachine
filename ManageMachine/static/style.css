@@ -201,8 +201,9 @@ background: -webkit-linear-gradient(transparent 50%, #f4cbcf 0%);
 background:linear-gradient(transparent 50%, #f4cbcf 0%);
 font-weight:700
 }
-input[type="text"] {
-background:#f4cbcf;
+input[type="text"],
+input[type="password"] {
+/* background:#f4cbcf; */
 border:1px solid #675950;
 color:#675950;
 font-family:Verdana,Roboto,'游ゴシック','Yu Gothic','游ゴシック体','YuGothic','ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','メイリオ',Meiryo,'ＭＳ Ｐゴシック','MS PGothic',sans-serif;
@@ -210,8 +211,11 @@ font-size:1.2em;
 margin:3px 0;
 /* width:400px */
 }
+.login {
+width:400px
+}
 select, option {
-  background:#f4cbcf;
+  /* background:#f4cbcf; */
   border:1px solid #675950;
   color:#675950;
   font-family:Verdana,Roboto,'游ゴシック','Yu Gothic','游ゴシック体','YuGothic','ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','メイリオ',Meiryo,'ＭＳ Ｐゴシック','MS PGothic',sans-serif;

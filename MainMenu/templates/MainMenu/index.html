@@ -18,10 +18,14 @@
 <div class="block-inner">
 
 <h1>{{ sitename }}</h1>
-注意書きとか必要であればここに。 <br>
-これは使わないで ダイレクトにindex2.htmlにアクセスするようにしちゃっても大丈夫です。<br><br>
-<a href="{% url 'MainMenu:index2' %}"><img src="{% static 'img/banner200.gif' %}" width="200" height="40" alt="banner"><br>ENTER</a>
-
+<form action="{% url 'MainMenu:index' %}" method="POST">
+    {% csrf_token %}
+    <table>
+        <tr><td>{{ form.user.label }}</td><td>{{ form.user }}<span class="ctrlerr">{{ form.user.errors.0 }}</span></td></tr>
+        <tr><td>{{ form.password.label }}</td><td>{{ form.password }}<span class="ctrlerr">{{ form.password.errors.0 }}</span></td></tr>
+        <tr><td></td><td><input type="submit" value="ログイン"></td></tr>
+    </table>
+</form>
 </div></div><!-- ▲枠▲ -->
 
 </div>
