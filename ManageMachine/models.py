@@ -38,3 +38,9 @@ class Schedule(models.Model) :
     start = models.DateTimeField('開始日時', null=False)
     end = models.DateTimeField('終了日時', null=False)
 
+class User(models.Model) :
+    userid = models.CharField('ユーザID', max_length=255)
+    password = models.CharField('パスワード', max_length=255)
+    name = models.CharField('表示名', max_length=255)
+    email = models.EmailField('メールアドレス', max_length=255)
+    admin = models.BooleanField('管理者フラグ')
