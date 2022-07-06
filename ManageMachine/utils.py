@@ -28,6 +28,12 @@ def readCsv() :
     df = pd.read_csv(path, encoding="utf_8", names=CSV_COL_NAME)
     return df
 
+def isRegistingOrderList() :
+    ret = ''
+    if (os.path.exists(REGIST_LIST_PATH)) :
+        ret = '現在実行中の一括予約処理が終了するまで次の予約はできません'
+    return ret
+
 def getMachineId(name) :
     return Machine.objects.get(name=name).id
 

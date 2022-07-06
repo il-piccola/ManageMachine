@@ -162,3 +162,7 @@ PLOTLY_COL_NAME = ('Task', 'Start', 'Finish')
 ORDER_COL_NAME = 'Order'
 TIME_COL_NAME = 'Time'
 
+# 一括予約リストファイル
+REGIST_LIST_FILE = 'regist_list.txt'
+REGIST_LIST_PATH = os.path.join(MEDIA_ROOT, REGIST_LIST_FILE)
+

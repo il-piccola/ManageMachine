@@ -28,15 +28,25 @@
         <b>号機名</b>{{ form.machine }}
         <b>ソート</b>{{ form.order }}{{ form.reverse }}
         <input type="submit" value="検索" name="btn_search">
-        　　　　<input type="submit" value="一括予約" name="btn_regist">
+        {% if not registing %}
+        <br><input type="submit" value="一括予約" name="btn_regist">
+        {% else %}
+        <br><input type="submit" value="一括予約" name="btn_regist" disabled="True">
+        {% endif %}
 </div></div>
 <!-- ▲枠▲ -->
 
 <!-- ▼内容▼ -->
-
+{% if not df.empty %}
 <table class="detailtable">
     <tr>
-        <th><input id="checkAll" type="checkbox" name="lang" value="checkall"></th>
+        <th>
+            {% if not registing %}
+            <input id="checkAll" type="checkbox" name="lang" value="checkall">
+            {% else %}
+            <input id="checkAll" type="checkbox" name="lang" value="checkall" disabled="True">
+            {% endif %}
+        </th>
         {% for colname in df.columns %}
         <th>{{ colname }}</th>
         {% endfor %}
@@ -44,7 +54,11 @@
     {% for index, values in df.iterrows %}
     <tr>
         <td>
+            {% if not registing %}
             <input type="checkbox" name="check" value="{{ index }}">
+            {% else %}
+            <input type="checkbox" name="check" value="{{ index }}" disabled="True">
+            {% endif %}
         </td>
         {% for item in values %}
         {% if forloop.counter == 1 %}
@@ -56,6 +70,7 @@
     </tr>
     {% endfor %}
 </table>
+{% endif %}
 </form>
 
 <!-- ▲内容▲ -->

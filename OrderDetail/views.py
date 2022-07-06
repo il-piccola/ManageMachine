@@ -23,13 +23,21 @@ def show(request, order) :
         'fig' : fig,
     }
     if (request.method == 'POST' and 'btn_auto' in request.POST) :
-        saveScheduleAuto(request, params, order, df)
-        params['formset'] = makeScheduleFormSet(order)
-        params['df'] = getDetail(order)
+        msg = isRegistingOrderList()
+        if (len(msg) > 0) :
+            params['msg'] = msg
+        else :
+            saveScheduleAuto(request, params, order, df)
+            params['formset'] = makeScheduleFormSet(order)
+            params['df'] = getDetail(order)
     elif (request.method == 'POST' and 'btn_manual' in request.POST) :
-        saveScheduleManual(request, params, order)
-        params['autoform'] = AutoScheduleForm(initial=initial)
-        params['df'] = getDetail(order)
+        msg = isRegistingOrderList()
+        if (len(msg) > 0) :
+            params['msg'] = msg
+        else :
+            saveScheduleManual(request, params, order)
+            params['autoform'] = AutoScheduleForm(initial=initial)
+            params['df'] = getDetail(order)
     else :
         params['autoform'] = AutoScheduleForm(initial=initial)
         params['formset'] = makeScheduleFormSet(order)

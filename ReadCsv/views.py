@@ -33,13 +33,14 @@ def show(request) :
         'msg' : 'アップロードされたCSVファイルを表示します',
         'df' : df,
         'form' : SearchForm(),
+        'registing' : False,
     }
     if (request.method != 'POST') :
         return render(request, 'ReadCsv/show.html', params)
+    if ('btn_regist' in request.POST) :
+        return confirm(request, params)
     params['df'] = makeDataFrame(request, df)
     params['form'] = SearchForm(data=request.POST)
-    if ('btn_regist' in request.POST) :
-        return regist(request, params)
     return render(request, 'ReadCsv/show.html', params)
 
 def makeDataFrame(request, df) :
@@ -56,6 +57,33 @@ def makeDataFrame(request, df) :
             ascending = False
         df.sort_values(CSV_COL_NAME[order], ascending=ascending, inplace=True)
     return df
+
+def confirm(request, params) :
+    msg = isRegistingOrderList()
+    if (len(msg) > 0) :
+        params['msg'] = msg
+        params['registing'] = True
+        return render(request, 'ReadCsv/show.html', params)
+    checklist = request.POST.getlist('check')
+    if (len(checklist) <= 0) :
+        params['msg'] = '一括予約対象を選択してください'
+        return render(request, 'ReadCsv/show.html', params)
+    if (len(checklist) > 100) :
+        params['msg'] = '一度に100件を超える一括予約はできません'
+        return render(request, 'ReadCsv/show.html', params)
+    checklist = list(map(int, checklist))
+    print('checklist:', len(checklist), 'df:', len(params['df']))
+    print('checklist:', checklist)
+    df = readCsv().iloc[checklist, :]
+    orderlist = list(df[CSV_COL_NAME[0]].drop_duplicates())
+    initial = {'orders' : ','.join(orderlist)}
+    params = {
+        'title' : 'Regist Orders',
+        'msg' : str(len(orderlist)) + '件の一括予約を実行します、時間がかかりますがよろしいですか？',
+        'form' : confirmForm(initial=initial),
+        'orderlist' : orderlist,
+    }
+    return render(request, 'ReadCsv/confirm.html', params)
 
 def regist(request, params) :
     checklist = request.POST.getlist('check')

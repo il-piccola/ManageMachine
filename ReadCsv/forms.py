@@ -34,3 +34,6 @@ class SearchForm(forms.Form) :
         label='', 
         choices=(('False', '降順'), ('True', '昇順')),
         widget=forms.Select())
+
+class confirmForm(forms.Form) :
+    orders = forms.CharField(widget=forms.HiddenInput())
