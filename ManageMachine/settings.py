@@ -114,7 +114,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'ja'
 
-TIME_ZONE = 'Asia/Tokyo'
+TIME_ZONE = 'UTC'   # 'Asia/Tokyo'にするとDB登録時の時刻がおかしくなる
 
 USE_I18N = True
 

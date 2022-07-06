@@ -4,7 +4,7 @@ import pandas as pd
 from zoneinfo import ZoneInfo
 from django.db.models import Q
 from ManageMachine.settings import *
-from ManageMachine.models import Csv, Machine, MachineTime, Schedule
+from ManageMachine.models import *
 
 def saveCsv(form) :
     form.save()
@@ -44,9 +44,9 @@ def fromDawnTillDuskD(date) :
     first = machinetimes.first()
     last = machinetimes.last()
     start = date.replace(hour=first.start.hour, minute=first.start.minute)
-    start = start.astimezone(ZoneInfo('Asia/Tokyo'))
+    start = convertDateTimeAware(start)
     end = date.replace(hour=last.end.hour, minute=last.end.minute)
-    end = end.astimezone(ZoneInfo('Asia/Tokyo'))
+    end = convertDateTimeAware(end)
     return [start, end]
 
 def fromDawnTillDuskSE(start, end) :
@@ -80,12 +80,12 @@ def resetBranch(order) :
             schedule.save()
 
 def getScheduleTime(machine, start, minutes) :
-    ret = getStartTimeOfDate(start)
+    ret = getStartTimeOfDate(machine, start)
     while True :
         end = ret + minutes
         time = fromDawnTillDuskD(ret)
         if (end > time[1]) :
-            ret = getStartTimeOfDate(end)
+            ret = getStartTimeOfDate(machine, end)
             end = ret + minutes
         schedules = getSchedulesInTerm(machine, ret, end)
         if (schedules.count() <= 0) :
@@ -93,13 +93,13 @@ def getScheduleTime(machine, start, minutes) :
         ret = convertDateTimeAware(schedules.order_by('end').last().end)
     return ret
 
-def getStartTimeOfDate(date) :
+def getStartTimeOfDate(machine, date) :
     ret = date
-    machinetimes = MachineTime.objects.filter(weekday=ret.weekday())
+    machinetimes = MachineTime.objects.filter(machine=machine, weekday=ret.weekday())
     if (machinetimes.count() <= 0) :
         while (machinetimes.count() <= 0) :
             ret = getNextDay(ret)
-            machinetimes = MachineTime.objects.filter(weekday=ret.weekday())
+            machinetimes = MachineTime.objects.filter(machine=machine, weekday=ret.weekday())
         ret = fromDawnTillDuskD(ret)[0]
     elif (ret > fromDawnTillDuskD(ret)[1]) :
         ret = getNextDay(ret)
@@ -150,7 +150,7 @@ def convertDateTimeNative(date) :
 def getNextDay(date) :
     return (date + datetime.timedelta(days=1)).replace(hour=0, minute=0, second=0)
 
-def getHourMinFromTimedelta(minutes) :
+def convertHMFromMinutes(minutes) :
     timedelta = datetime.timedelta(minutes=minutes)
     minutes, seconds = divmod(timedelta.seconds, 60)
     hours, minutes = divmod(minutes, 60)

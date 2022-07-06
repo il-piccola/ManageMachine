@@ -49,11 +49,11 @@ def getDetail(order) :
     return df
 
 def getTerm(df) :
-    hours, minutes = getHourMinFromTimedelta(df[CSV_COL_NAME[4]].sum())
+    hours, minutes = convertHMFromMinutes(df[CSV_COL_NAME[4]].sum())
     ret = getTermStr(hours, minutes)
     ret = ret + "("
     for index, row in df.iterrows() :
-        hours, minutes = getHourMinFromTimedelta(row[CSV_COL_NAME[4]])
+        hours, minutes = convertHMFromMinutes(row[CSV_COL_NAME[4]])
         ret = ret + row[CSV_COL_NAME[1]] + "：" + getTermStr(hours, minutes)
         if (index < len(df)-1) :
             ret = ret + ","
