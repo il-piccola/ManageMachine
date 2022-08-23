@@ -7,6 +7,9 @@ class UploadForm(forms.ModelForm) :
     class Meta :
         model = Csv
         fields = ['csv']
+        widgets = {
+            'csv' : forms.FileInput(attrs={'class':'form-control'})
+        }
 
 class SearchForm(forms.Form) :
     def getMachineMenu() :
@@ -34,6 +37,3 @@ class SearchForm(forms.Form) :
         label='', 
         choices=(('False', '降順'), ('True', '昇順')),
         widget=forms.Select())
-
-class confirmForm(forms.Form) :
-    orders = forms.CharField(widget=forms.HiddenInput())
